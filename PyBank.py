@@ -1,7 +1,12 @@
 import os
 import csv
+import numpy as np
 
-# PRINT INTRODUCTIO TO ANALYSIS
+# DEFINE VARIABLES
+
+#net_total = 
+
+# PRINT INTRODUCTION TO ANALYSIS
 
 print("Financial Analysis")
 
@@ -13,7 +18,7 @@ budget_csv = os.path.join('..', "python-challenge", 'budget_data.csv')
 
 with open(budget_csv, newline="") as csvfile:
     csvreader = csv.reader(csvfile, delimiter=',')
-    
+
     data = list(csvreader)
     
     row_count = len(data)
@@ -22,15 +27,28 @@ with open(budget_csv, newline="") as csvfile:
 
 # TASK TWO - CALCULATE NET TOTAL P/L ENTIRE PERIOD
 
+with open(budget_csv, newline="") as csvfile:
+    csvreader = csv.reader(csvfile, delimiter=',')
+
+    next(csvreader, None)
+
     net_total = 0
 
-    for row in csv.reader(csvfile):
-        for col in row[1]:
-            net_total += int(col)
-    print("Total: $" + str(net_total))
+    for rows in csvreader:
+
+        net_total += float(rows[1])
+
+    print("Total: $ " + str(round(net_total)))
 
 # TASK THREE - CALCULATE AVERAGE P/L
+
+    def mean(net_total):
+        return float(sum(net_total)) / max(len(net_total), 1)
+        
+        print np.mean(net_total)
 
 # TASK FOUR - CALCULATE GREATEST INCREASE IN PROFIT
 
 # TASK FIVE - CALCULATE GREATEST DECREASE IN LOSS
+
+#df.groupby('A').agg(['min', 'max'])
