@@ -1,54 +1,46 @@
 import os
 import csv
-import numpy as np
 
-# DEFINE VARIABLES
+budget_csv = os.path.join('..', "python-challenge", 'budget_data.csv')
 
-#net_total = 
+month_total = []
+net_total = []
+average_total = []
 
-# PRINT INTRODUCTION TO ANALYSIS
+with open(budget_csv, newline="") as csvfile:
+
+    csvreader = csv.reader(csvfile, delimiter=',')
+
+    header = next(csvreader)
+
+    for row in csvreader:
+
+        month_total.append(row[0])
+
+        net_total.append(int(row[1]))
+
+    for i in range(len(net_total)-1):
+
+        average_total.append(net_total[i+1]-net_total[i])
+
+max_increase = max(average_total)
+
+max_decrease = min(average_total)
+
+max_increase_month = average_total.index(max(average_total)) + 1
+
+max_decrease_month = average_total.index(min(average_total)) + 1
 
 print("Financial Analysis")
 
 print("--------------------------")
 
-# TASK ONE - CALCULATE TOTAL MONTHS IN DATASET
+print(f"Total Months: {len(month_total)}")
 
-budget_csv = os.path.join('..', "python-challenge", 'budget_data.csv')
+print(f"Total: ${sum(net_total)}")
 
-with open(budget_csv, newline="") as csvfile:
-    csvreader = csv.reader(csvfile, delimiter=',')
+print(f"Average Change: ${round(sum(average_total)/len(average_total),2)}")
 
-    data = list(csvreader)
-    
-    row_count = len(data)
-    
-    print("Total Months: " + str(row_count - 1))
+print(f"Max Increase: {month_total[max_increase_month]} ${(str(max_increase))}")
 
-# TASK TWO - CALCULATE NET TOTAL P/L ENTIRE PERIOD
-
-with open(budget_csv, newline="") as csvfile:
-    csvreader = csv.reader(csvfile, delimiter=',')
-
-    next(csvreader, None)
-
-    net_total = 0
-
-    for rows in csvreader:
-
-        net_total += float(rows[1])
-
-    print("Total: $ " + str(round(net_total)))
-
-# TASK THREE - CALCULATE AVERAGE P/L
-
-    def mean(net_total):
-        return float(sum(net_total)) / max(len(net_total), 1)
-        
-        print np.mean(net_total)
-
-# TASK FOUR - CALCULATE GREATEST INCREASE IN PROFIT
-
-# TASK FIVE - CALCULATE GREATEST DECREASE IN LOSS
-
-#df.groupby('A').agg(['min', 'max'])
+print(f"Max Decrease: {month_total[max_decrease_month]} ${(str(max_decrease))}")
