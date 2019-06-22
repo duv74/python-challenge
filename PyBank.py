@@ -44,3 +44,21 @@ print(f"Average Change: ${round(sum(average_total)/len(average_total),2)}")
 print(f"Max Increase: {month_total[max_increase_month]} ${(str(max_increase))}")
 
 print(f"Max Decrease: {month_total[max_decrease_month]} ${(str(max_decrease))}")
+
+output_path = os.path.join('..', "python-challenge", "Summary.txt")
+
+with open(output_path, 'w', newline='') as file:
+    
+    file.write("Financial Analysis")
+    file.write("\n")
+    file.write("----------------------------")
+    file.write("\n")
+    file.write(f"Total Months: {len(month_total)}")
+    file.write("\n")
+    file.write(f"Total: ${sum(net_total)}")
+    file.write("\n")
+    file.write(f"Average Change: {round(sum(average_total)/len(average_total),2)}")
+    file.write("\n")
+    file.write(f"Greatest Increase: {month_total[max_increase_month]} (${(str(max_increase))})")
+    file.write("\n")
+    file.write(f"Greatest Decrease: {month_total[max_decrease_month]} (${(str(max_decrease))})")
